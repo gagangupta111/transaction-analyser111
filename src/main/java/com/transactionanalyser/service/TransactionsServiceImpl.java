@@ -7,6 +7,7 @@ import com.transactionanalyser.model.TransactionRecord;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TransactionsServiceImpl implements TransactionsService{
 
@@ -18,9 +19,11 @@ public class TransactionsServiceImpl implements TransactionsService{
         service.initialize();
         List<TransactionRecord> list = service.getTRANSACTION_RECORDS();
 
+        return list.stream()
+                .filter(record -> fromDate.after(record.getDate()) && toDate.before(record.getDate()))
+                .filter(record -> merchant.equals(record.getMerchant())).
+                collect(Collectors.toList());
 
-
-        return null;
     }
 
 }
