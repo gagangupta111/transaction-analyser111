@@ -16,12 +16,13 @@ public class TransactionRecord {
     public TransactionRecord() {
     }
 
-    public TransactionRecord(String id, Date date, Double amount, String merchant, Enum<Type> type) {
+    public TransactionRecord(String id, Date date, Double amount, String merchant, Enum<Type> type, String relatedTransaction) {
         this.id = id;
         this.date = date;
         this.amount = amount;
         this.merchant = merchant;
         this.type = type;
+        this.relatedTransaction = relatedTransaction;
     }
 
     public String getId() {
