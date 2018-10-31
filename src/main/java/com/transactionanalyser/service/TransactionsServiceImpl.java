@@ -4,6 +4,7 @@ import com.transactionanalyser.cache.TransactionRecordCacheService;
 import com.transactionanalyser.fileReader.CSVFileReader;
 import com.transactionanalyser.fileReader.FileReaderUtil;
 import com.transactionanalyser.model.TransactionRecord;
+import com.transactionanalyser.validation.Validation;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,8 @@ public class TransactionsServiceImpl implements TransactionsService{
         TransactionRecordCacheService service = new TransactionRecordCacheService(fileReaderUtil);
         service.initialize();
         List<TransactionRecord> list = service.getTRANSACTION_RECORDS();
+
+        Validation.validateMerchantName(merchant, list);
 
         return list.stream()
                 .filter(record -> fromDate.after(record.getDate()) && toDate.before(record.getDate()))
