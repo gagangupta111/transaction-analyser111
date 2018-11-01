@@ -9,7 +9,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
-import static com.transactionanalyser.constants.Formats.formatter;
 import static com.transactionanalyser.validation.Validator.validateDate;
 
 public class TransactionsServiceValidCSVTests {
@@ -24,7 +23,7 @@ public class TransactionsServiceValidCSVTests {
     public void shouldPassWithOneResultReturnedBetweenDates() throws ParseException {
 
         List<TransactionRecord> expectedList = new ArrayList<>();
-        expectedList.add(new TransactionRecord("WLMFRDGD", formatter.parse("20/08/2018 12:45:33"),
+        expectedList.add(new TransactionRecord("WLMFRDGD", validateDate("20/08/2018 12:45:33"),
                 59.99, "Kwik-E-Mart", Type.valueOf("PAYMENT"), ""));
 
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
@@ -34,6 +33,21 @@ public class TransactionsServiceValidCSVTests {
 
         assertEquals(expectedList, actualList);
 
+    }
+
+    @Test
+    public void shouldMatchWithExpectedResultMacLaren(){
+
+        List<TransactionRecord> expectedList = new ArrayList<>();
+        expectedList.add(new TransactionRecord("LFVCTEYM", validateDate("20/08/2018 12:50:02"),
+                5.0, "MacLaren", Type.valueOf("PAYMENT"), ""));
+
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
+                validateDate("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 14:00:00"),
+                "MacLaren");
+
+        assertEquals(expectedList, actualList);
     }
 
     @Test
