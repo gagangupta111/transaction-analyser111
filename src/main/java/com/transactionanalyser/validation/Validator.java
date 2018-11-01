@@ -5,7 +5,7 @@ import com.transactionanalyser.model.TransactionRecord;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.transactionanalyser.constants.ValidatorErrorCodes.MERCHANT_NAME_IS_NOT_VALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.MERCHANT_NAME_INVALID;
 
 public class Validator {
 
@@ -14,7 +14,7 @@ public class Validator {
         if (merchant == null || "".equals(merchant) ||
         list.stream().filter(record -> (record.getMerchant().equals(merchant)))
             .collect(Collectors.toList()).isEmpty()){
-            throw new IllegalArgumentException(MERCHANT_NAME_IS_NOT_VALID);
+            throw new IllegalArgumentException(MERCHANT_NAME_INVALID);
         }
     }
 

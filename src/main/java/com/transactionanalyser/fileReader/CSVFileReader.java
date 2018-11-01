@@ -2,7 +2,7 @@ package com.transactionanalyser.fileReader;
 
 import com.opencsv.CSVReader;
 import static com.transactionanalyser.constants.Formats.formatter;
-import static com.transactionanalyser.constants.ValidatorErrorCodes.CSV_DATE_IS_INVALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.DATE_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.AMOUNT_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.FILE_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVALID;
@@ -40,7 +40,7 @@ public class CSVFileReader implements FileReaderUtil {
                     try {
                         date = formatter.parse(line[1].trim());
                     } catch (ParseException e) {
-                        throw new IllegalArgumentException(CSV_DATE_IS_INVALID + formatter.toPattern() + " " + line[1]);
+                        throw new IllegalArgumentException(DATE_IS_INVALID + formatter.toPattern() + " " + line[1]);
                     }
 
                     try {
