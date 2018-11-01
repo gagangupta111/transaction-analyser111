@@ -15,6 +15,7 @@ import static com.transactionanalyser.constants.ValidatorErrorCodes.DATE_IS_INVA
 import static com.transactionanalyser.constants.ValidatorErrorCodes.FILE_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.MERCHANT_NAME_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVALID;
+import static com.transactionanalyser.validation.Validator.validateDate;
 
 public class TransactionsServiceInValidCSVTests {
 
@@ -34,8 +35,8 @@ public class TransactionsServiceInValidCSVTests {
         expectedEx.expect(IllegalArgumentException.class);
         expectedEx.expectMessage(MERCHANT_NAME_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
-                formatter.parse("20/08/2018 12:00:00"),
-                formatter.parse("20/08/2018 13:00:00"),
+                validateDate("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 13:00:00"),
                 "INVALID");
 
     }
@@ -46,8 +47,8 @@ public class TransactionsServiceInValidCSVTests {
         expectedEx.expect(IllegalArgumentException.class);
         expectedEx.expectMessage(DATE_IS_INVALID + formatter.toPattern());
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_date_csv_1.csv",
-                formatter.parse("20/08/2018 12:00:00"),
-                formatter.parse("20/08/2018 13:00:00"),
+                validateDate("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
     }
 
@@ -57,8 +58,8 @@ public class TransactionsServiceInValidCSVTests {
         expectedEx.expect(IllegalArgumentException.class);
         expectedEx.expectMessage(AMOUNT_IS_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_amount_csv_2.csv",
-                formatter.parse("20/08/2018 12:00:00"),
-                formatter.parse("20/08/2018 13:00:00"),
+                validateDate("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
     }
 
@@ -68,8 +69,8 @@ public class TransactionsServiceInValidCSVTests {
         expectedEx.expect(IllegalArgumentException.class);
         expectedEx.expectMessage(TYPE_IS_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_type_csv_3.csv",
-                formatter.parse("20/08/2018 12:00:00"),
-                formatter.parse("20/08/2018 13:00:00"),
+                validateDate("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
     }
 
@@ -79,8 +80,8 @@ public class TransactionsServiceInValidCSVTests {
         expectedEx.expect(IllegalArgumentException.class);
         expectedEx.expectMessage(FILE_IS_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("xxx.csv",
-                formatter.parse("20/08/2018 12:00:00"),
-                formatter.parse("20/08/2018 13:00:00"),
+                validateDate("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
     }
 }

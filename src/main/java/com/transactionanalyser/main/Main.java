@@ -1,7 +1,6 @@
 package com.transactionanalyser.main;
 
 import com.transactionanalyser.api.TransactionAnalyser;
-import static org.junit.Assert.assertEquals;
 
 public class Main {
 

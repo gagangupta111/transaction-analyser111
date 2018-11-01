@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static com.transactionanalyser.constants.Formats.formatter;
+import static com.transactionanalyser.validation.Validator.validateDate;
 
 public class TransactionsServiceValidCSVTests {
 
@@ -27,8 +28,8 @@ public class TransactionsServiceValidCSVTests {
                 59.99, "Kwik-E-Mart", Type.valueOf("PAYMENT"), ""));
 
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
-                formatter.parse("20/08/2018 12:00:00"),
-                formatter.parse("20/08/2018 13:00:00"),
+                validateDate("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
 
         assertEquals(expectedList, actualList);
@@ -41,8 +42,8 @@ public class TransactionsServiceValidCSVTests {
         List<TransactionRecord> expectedList = new ArrayList<>();
 
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
-                formatter.parse("20/08/2018 11:00:00"),
-                formatter.parse("20/08/2018 12:00:00"),
+                validateDate("20/08/2018 11:00:00"),
+                validateDate("20/08/2018 12:00:00"),
                 "Kwik-E-Mart");
 
         assertEquals(expectedList, actualList);
