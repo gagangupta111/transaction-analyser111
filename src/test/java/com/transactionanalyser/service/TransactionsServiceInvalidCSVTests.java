@@ -1,5 +1,7 @@
 package com.transactionanalyser.service;
 
+import com.transactionanalyser.exception.BadCsvException;
+import com.transactionanalyser.exception.BadInputException;
 import com.transactionanalyser.model.TransactionRecord;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -18,7 +20,7 @@ import static com.transactionanalyser.constants.ValidatorErrorCodes.REVERSAL_ID_
 import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVALID;
 import static com.transactionanalyser.validation.Validator.validateDate;
 
-public class TransactionsServiceInValidCSVTests {
+public class TransactionsServiceInvalidCSVTests {
 
     private static TransactionsService service;
 
@@ -31,9 +33,9 @@ public class TransactionsServiceInValidCSVTests {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @Test
-    public void shouldThrowInvalidMerchantNameException() throws ParseException {
+    public void shouldThrowInvalidMerchantNameException() throws BadCsvException {
 
-        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expect(BadInputException.class);
         expectedEx.expectMessage(MERCHANT_NAME_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
                 validateDate("20/08/2018 12:00:00"),
@@ -43,9 +45,9 @@ public class TransactionsServiceInValidCSVTests {
     }
 
     @Test
-    public void shouldThrowInvalidDateException() throws ParseException {
+    public void shouldThrowBadCsvExceptionAsDateInvalid() throws BadCsvException {
 
-        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(DATE_IS_INVALID + formatter.toPattern());
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_date_csv_1.csv",
                 validateDate("20/08/2018 12:00:00"),
@@ -54,9 +56,9 @@ public class TransactionsServiceInValidCSVTests {
     }
 
     @Test
-    public void shouldThrowInvalidAmountException() throws ParseException {
+    public void shouldThrowBadCsvExceptionAsAmountInvalid() throws BadCsvException {
 
-        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(AMOUNT_IS_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_amount_csv_2.csv",
                 validateDate("20/08/2018 12:00:00"),
@@ -65,9 +67,9 @@ public class TransactionsServiceInValidCSVTests {
     }
 
     @Test
-    public void shouldThrowInvalidTypeException() throws ParseException {
+    public void shouldThrowBadCsvExceptionAsTypeInvalid() throws BadCsvException {
 
-        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(TYPE_IS_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_type_csv_3.csv",
                 validateDate("20/08/2018 12:00:00"),
@@ -76,9 +78,9 @@ public class TransactionsServiceInValidCSVTests {
     }
 
     @Test
-    public void shouldThrowInvalidFileNameOrPathException() throws ParseException {
+    public void shouldThrowBadCsvExceptionAsFileInvalid() throws BadCsvException {
 
-        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expect(BadInputException.class);
         expectedEx.expectMessage(FILE_IS_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("xxx.csv",
                 validateDate("20/08/2018 12:00:00"),
@@ -87,9 +89,9 @@ public class TransactionsServiceInValidCSVTests {
     }
 
     @Test
-    public void shouldThrowInvalidReversalIdsException() throws ParseException {
+    public void shouldThrowBadCsvExceptionAsInvalidReversalIds() throws BadCsvException {
 
-        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(REVERSAL_ID_INVALID);
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_reversal_ids_4.csv",
                 validateDate("20/08/2018 12:00:00"),

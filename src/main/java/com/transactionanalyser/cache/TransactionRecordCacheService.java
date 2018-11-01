@@ -1,5 +1,6 @@
 package com.transactionanalyser.cache;
 
+import com.transactionanalyser.exception.BadCsvException;
 import com.transactionanalyser.fileReader.FileReaderUtil;
 import com.transactionanalyser.model.TransactionRecord;
 import java.util.List;
@@ -13,7 +14,7 @@ public class TransactionRecordCacheService {
         this.fileReader = fileReader;
     }
 
-    public void initialize(){
+    public void initialize() throws BadCsvException {
 
         TRANSACTION_RECORDS = fileReader.read();
 

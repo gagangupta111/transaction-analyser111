@@ -7,8 +7,12 @@ import static com.transactionanalyser.constants.ValidatorErrorCodes.AMOUNT_IS_IN
 import static com.transactionanalyser.constants.ValidatorErrorCodes.FILE_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVALID;
 
+import com.transactionanalyser.exception.BadCsvException;
+import com.transactionanalyser.exception.BadInputException;
 import com.transactionanalyser.model.TransactionRecord;
 import com.transactionanalyser.model.Type;
+
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -25,7 +29,7 @@ public class CSVFileReader implements FileReaderUtil {
     }
 
     @Override
-    public List<TransactionRecord> read() {
+    public List<TransactionRecord> read() throws BadCsvException {
 
             List<TransactionRecord> list = new ArrayList<>();
 
@@ -40,19 +44,19 @@ public class CSVFileReader implements FileReaderUtil {
                     try {
                         date = formatter.parse(line[1].trim());
                     } catch (ParseException e) {
-                        throw new IllegalArgumentException(DATE_IS_INVALID + formatter.toPattern() + " " + line[1]);
+                        throw new BadCsvException(DATE_IS_INVALID + formatter.toPattern() + " " + line[1]);
                     }
 
                     try {
                         amount = Double.parseDouble(line[2].trim());
                     } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException(AMOUNT_IS_INVALID + line[2]);
+                        throw new BadCsvException(AMOUNT_IS_INVALID + line[2]);
                     }
 
                     try {
                         type = Type.valueOf(line[4].trim());
                     }catch (IllegalArgumentException e){
-                        throw new IllegalArgumentException(TYPE_IS_INVALID + line[4]);
+                        throw new BadCsvException(TYPE_IS_INVALID + line[4]);
                     }
 
                     TransactionRecord record = new TransactionRecord(line[0].trim(), date, amount, line[3].trim(), type, line[5].trim());
@@ -60,8 +64,12 @@ public class CSVFileReader implements FileReaderUtil {
 
                 }
 
-            } catch (IOException | NullPointerException e) {
-                throw new IllegalArgumentException(FILE_IS_INVALID + csvFilePath);
+            } catch (FileNotFoundException | NullPointerException e) {
+                throw new BadInputException(FILE_IS_INVALID + csvFilePath);
+            } catch (BadCsvException e) {
+                throw e;
+            } catch (IOException e) {
+                throw new BadCsvException(FILE_IS_INVALID + csvFilePath);
             }
 
         return list;

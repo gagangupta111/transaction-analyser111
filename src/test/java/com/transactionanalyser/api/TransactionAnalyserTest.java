@@ -3,6 +3,7 @@ package com.transactionanalyser.api;
 import static org.junit.Assert.assertEquals;
 
 import com.transactionanalyser.constants.ValidatorErrorCodes;
+import com.transactionanalyser.exception.BadCsvException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class TransactionAnalyserTest {
     }
 
     @Test
-    public void shouldMatchWithExpectedResult(){
+    public void shouldMatchWithExpectedResult() throws BadCsvException {
 
         String expectedResult = "Number of transactions = 1\n" +
                 "Average Transaction Value = 59.99";
@@ -29,7 +30,7 @@ public class TransactionAnalyserTest {
     }
 
     @Test
-    public void shouldMatchWithExpectedResultMacLaren(){
+    public void shouldMatchWithExpectedResultMacLaren() throws BadCsvException {
 
         String expectedResult = "Number of transactions = 1\n" +
                 "Average Transaction Value = 5.0";
@@ -42,7 +43,7 @@ public class TransactionAnalyserTest {
     }
 
     @Test
-    public void shouldMatchWithNoTransactionFound(){
+    public void shouldMatchWithNoTransactionFound() throws BadCsvException {
 
         String actualResult = transactionAnalyser.analyseTransaction("valid_csv_1.csv",
                 "20/08/2018 11:00:00",

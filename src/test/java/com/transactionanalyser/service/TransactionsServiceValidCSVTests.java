@@ -1,5 +1,6 @@
 package com.transactionanalyser.service;
 
+import com.transactionanalyser.exception.BadCsvException;
 import com.transactionanalyser.model.TransactionRecord;
 import com.transactionanalyser.model.Type;
 import org.junit.BeforeClass;
@@ -20,7 +21,7 @@ public class TransactionsServiceValidCSVTests {
         service = new TransactionsServiceImpl();
     }
     @Test
-    public void shouldPassWithOneResultReturnedBetweenDates() throws ParseException {
+    public void shouldPassWithOneResultReturnedBetweenDates() throws BadCsvException {
 
         List<TransactionRecord> expectedList = new ArrayList<>();
         expectedList.add(new TransactionRecord("WLMFRDGD", validateDate("20/08/2018 12:45:33"),
@@ -36,7 +37,7 @@ public class TransactionsServiceValidCSVTests {
     }
 
     @Test
-    public void shouldMatchWithExpectedResultMacLaren(){
+    public void shouldMatchWithExpectedResultMacLaren() throws BadCsvException {
 
         List<TransactionRecord> expectedList = new ArrayList<>();
         expectedList.add(new TransactionRecord("LFVCTEYM", validateDate("20/08/2018 12:50:02"),
@@ -51,7 +52,7 @@ public class TransactionsServiceValidCSVTests {
     }
 
     @Test
-    public void shouldPassWithNoResultReturnedBetweenDates() throws ParseException {
+    public void shouldPassWithNoResultReturnedBetweenDates() throws ParseException, BadCsvException {
 
         List<TransactionRecord> expectedList = new ArrayList<>();
 

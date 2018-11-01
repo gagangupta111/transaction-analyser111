@@ -6,13 +6,12 @@ There are 2 ways to run the Transaction Analyser:
 2. Using any valid unit Tests with valid parameters.
 
 Transaction Analyser takes 4 parameters:
-1. CSV file name. All examples of valid and invalid csv files are placed in the resources folder.
-    example: valid_csv_1.csv
-2. Date parameters which will fetch all transactions which lies in middle of these 2 date parameters, From Date and To Date.
-    The format shall be dd/MM/YYYY hh:mm:ss otherwise there will be exception. Example : 20/08/2018 12:50:02
+1. CSV file name. Place your csv file in resources folder. example: valid_csv_1.csv
+2. Date parameters :  From Date and To Date. Transaction Analyser will fetch all transactions which lies in middle of these 2 dates,
+    The format shall be dd/MM/YYYY hh:mm:ss, Example : 20/08/2018 12:50:02. Otherwise it throws an exception.
 3. Merchant Name. Example : Kwik-E-Mart
 
-Please check class Main.java or TransactionAnalyserTest.java for accurate example usage.
+Please check class com.transactionanalyser.main.Main or com.transactionanalyser.api.TransactionAnalyserTest.java for accurate details.
 
 Illustrations of various IllegalArgumentException codes:
 1. DATE_IS_INVALID : This code will appear when the Date is not in proper format. Either from CSV file or from any of the date input parameter mentioned above.

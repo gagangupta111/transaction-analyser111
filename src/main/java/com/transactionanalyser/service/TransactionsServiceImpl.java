@@ -1,6 +1,7 @@
 package com.transactionanalyser.service;
 
 import com.transactionanalyser.cache.TransactionRecordCacheService;
+import com.transactionanalyser.exception.BadCsvException;
 import com.transactionanalyser.fileReader.CSVFileReader;
 import com.transactionanalyser.fileReader.FileReaderUtil;
 import com.transactionanalyser.model.TransactionRecord;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 public class TransactionsServiceImpl implements TransactionsService{
 
     @Override
-    public List<TransactionRecord> getTransactionsBaseOnParameters(String path, Date fromDate, Date toDate, String merchant) {
+    public List<TransactionRecord> getTransactionsBaseOnParameters(String path, Date fromDate, Date toDate, String merchant) throws BadCsvException {
 
         path = path.trim();
         final String merchantName = merchant.trim();

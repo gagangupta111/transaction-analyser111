@@ -1,5 +1,6 @@
 package com.transactionanalyser.api;
 
+import com.transactionanalyser.exception.BadCsvException;
 import com.transactionanalyser.model.TransactionRecord;
 import com.transactionanalyser.service.TransactionsService;
 import com.transactionanalyser.service.TransactionsServiceImpl;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class TransactionAnalyser {
 
-    public String analyseTransaction(String path, String fromDate, String toDate, String merchant){
+    public String analyseTransaction(String path, String fromDate, String toDate, String merchant) throws BadCsvException {
 
         Date fDate = validateDate(fromDate);
         Date tDate = validateDate(toDate);
