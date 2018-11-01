@@ -1,20 +1,20 @@
 package com.transactionanalyser.main;
 
-import com.transactionanalyser.model.TransactionRecord;
-import com.transactionanalyser.model.Type;
-import com.transactionanalyser.service.TransactionsService;
-import com.transactionanalyser.service.TransactionsServiceImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.transactionanalyser.constants.Formats.formatter;
+import com.transactionanalyser.api.TransactionAnalyser;
+import static org.junit.Assert.assertEquals;
 
 public class Main {
 
     public static void main(String[] args){
 
+        TransactionAnalyser transactionAnalyser = new TransactionAnalyser();
 
+        String actualResult = transactionAnalyser.analyseTransaction("valid_csv_1.csv",
+                "20/08/2018 12:00:00",
+                "20/08/2018 14:00:00",
+                "MacLaren");
+
+        System.out.println(actualResult);
 
     }
 
