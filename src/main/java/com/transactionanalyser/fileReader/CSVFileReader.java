@@ -9,13 +9,9 @@ import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVA
 
 import com.transactionanalyser.model.TransactionRecord;
 import com.transactionanalyser.model.Type;
-import sun.misc.ClassLoaderUtil;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
