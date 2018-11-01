@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import static com.transactionanalyser.constants.Formats.formatter;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.DATE_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.MERCHANT_NAME_INVALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.REVERSAL_ID_INVALID;
 
 public class Validator {
 
@@ -30,8 +31,14 @@ public class Validator {
         } catch (ParseException e) {
             throw new IllegalArgumentException(DATE_IS_INVALID + date);
         }
-
         return fDate;
+    }
+
+    public static void validateReversalIds(List<String> reverseIds, List<String> paymentIds){
+
+       if (!paymentIds.containsAll(reverseIds)){
+            throw new IllegalArgumentException(REVERSAL_ID_INVALID);
+       }
     }
 
 }

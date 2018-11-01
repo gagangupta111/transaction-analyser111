@@ -27,16 +27,21 @@ public class TransactionsServiceImpl implements TransactionsService{
         Validator.validateMerchantName(merchant, list);
 
         List<String> listOfReversalIds = new ArrayList<>();
+        List<String> paymentIds = new ArrayList<>();
+
         list = list.stream()
                 .peek(record -> {
+                    paymentIds.add(record.getId());
                     if (Type.REVERSAL.equals(record.getType())){
                         listOfReversalIds.add(record.getRelatedTransaction());
                     }
                 })
+                .filter(record -> Type.PAYMENT.equals(record.getType()))
                 .filter(record -> record.getDate().after(fromDate) && record.getDate().before(toDate))
                 .filter(record -> merchantName.equals(record.getMerchant()))
                 .collect(Collectors.toList());
 
+        Validator.validateReversalIds(listOfReversalIds, paymentIds);
         return list.stream()
                 .filter(record -> !listOfReversalIds.contains(record.getId())).collect(Collectors.toList());
 
