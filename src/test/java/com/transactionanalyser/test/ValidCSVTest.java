@@ -1,5 +1,6 @@
 package com.transactionanalyser.test;
 
+import static com.transactionanalyser.constants.ValidatorErrorCodes.MERCHANT_NAME_IS_NOT_VALID;
 import com.transactionanalyser.model.TransactionRecord;
 import com.transactionanalyser.model.Type;
 import com.transactionanalyser.service.TransactionsService;
@@ -55,7 +56,7 @@ public class ValidCSVTest {
     public void shouldThrowInvalidMerchantNameException() throws ParseException {
 
         expectedEx.expect(IllegalArgumentException.class);
-        expectedEx.expectMessage("Merchant name is either empty or not found in records.");
+        expectedEx.expectMessage(MERCHANT_NAME_IS_NOT_VALID);
         TransactionsService service = new TransactionsServiceImpl();
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
                 formatter.parse("20/08/2018 12:00:00"),

@@ -43,7 +43,7 @@ public class CSVFileReader implements FileReaderUtil {
                     try {
                         date = formatter.parse(line[1].trim());
                     } catch (ParseException e) {
-                        throw new IllegalArgumentException(CSV_DATE_IS_INVALID + formatter + " " + line[1]);
+                        throw new IllegalArgumentException(CSV_DATE_IS_INVALID + formatter.toPattern() + " " + line[1]);
                     }
 
                     try {
