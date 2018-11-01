@@ -11,6 +11,7 @@ import com.transactionanalyser.model.TransactionRecord;
 import com.transactionanalyser.model.Type;
 import sun.misc.ClassLoaderUtil;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -63,7 +64,7 @@ public class CSVFileReader implements FileReaderUtil {
 
                 }
 
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 throw new IllegalArgumentException(FILE_IS_INVALID + csvFilePath);
             }
 

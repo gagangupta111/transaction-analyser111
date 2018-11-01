@@ -13,6 +13,7 @@ import java.util.List;
 import static com.transactionanalyser.constants.Formats.formatter;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.AMOUNT_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.CSV_DATE_IS_INVALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.FILE_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVALID;
 
 public class InvalidCSVTest {
@@ -51,6 +52,18 @@ public class InvalidCSVTest {
         expectedEx.expectMessage(TYPE_IS_INVALID);
         TransactionsService service = new TransactionsServiceImpl();
         List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_type_csv_3.csv",
+                formatter.parse("20/08/2018 12:00:00"),
+                formatter.parse("20/08/2018 13:00:00"),
+                "Kwik-E-Mart");
+    }
+
+    @Test
+    public void shouldThrowInvalidFileNameOrPathException() throws ParseException {
+
+        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expectMessage(FILE_IS_INVALID);
+        TransactionsService service = new TransactionsServiceImpl();
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("xxx.csv",
                 formatter.parse("20/08/2018 12:00:00"),
                 formatter.parse("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
