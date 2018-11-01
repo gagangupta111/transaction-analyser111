@@ -4,6 +4,7 @@ import com.transactionanalyser.cache.TransactionRecordCacheService;
 import com.transactionanalyser.fileReader.CSVFileReader;
 import com.transactionanalyser.fileReader.FileReaderUtil;
 import com.transactionanalyser.model.TransactionRecord;
+import com.transactionanalyser.model.Type;
 import com.transactionanalyser.validation.Validator;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class TransactionsServiceImpl implements TransactionsService{
         List<String> listOfReversalIds = new ArrayList<>();
         list = list.stream()
                 .peek(record -> {
-                    if (!"".equals(record.getRelatedTransaction())){
+                    if (Type.REVERSAL.equals(record.getType())){
                         listOfReversalIds.add(record.getRelatedTransaction());
                     }
                 })

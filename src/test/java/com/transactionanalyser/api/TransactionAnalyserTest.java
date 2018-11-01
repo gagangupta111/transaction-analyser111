@@ -29,6 +29,19 @@ public class TransactionAnalyserTest {
     }
 
     @Test
+    public void shouldMatchWithExpectedResultMacLaren(){
+
+        String expectedResult = "Number of transactions = 1\n" +
+                "Average Transaction Value = 5.0";
+
+        String actualResult = transactionAnalyser.analyseTransaction("valid_csv_1.csv",
+                "20/08/2018 12:00:00",
+                "20/08/2018 14:00:00",
+                "MacLaren");
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void shouldMatchWithNoTransactionFound(){
 
         String actualResult = transactionAnalyser.analyseTransaction("valid_csv_1.csv",
