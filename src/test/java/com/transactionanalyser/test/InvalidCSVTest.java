@@ -14,12 +14,26 @@ import static com.transactionanalyser.constants.Formats.formatter;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.AMOUNT_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.CSV_DATE_IS_INVALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.FILE_IS_INVALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.MERCHANT_NAME_IS_NOT_VALID;
 import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVALID;
 
 public class InvalidCSVTest {
 
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
+
+    @Test
+    public void shouldThrowInvalidMerchantNameException() throws ParseException {
+
+        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expectMessage(MERCHANT_NAME_IS_NOT_VALID);
+        TransactionsService service = new TransactionsServiceImpl();
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
+                formatter.parse("20/08/2018 12:00:00"),
+                formatter.parse("20/08/2018 13:00:00"),
+                "INVALID");
+
+    }
 
     @Test
     public void shouldThrowInvalidDateException() throws ParseException {

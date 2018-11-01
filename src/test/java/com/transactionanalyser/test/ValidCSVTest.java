@@ -49,20 +49,4 @@ public class ValidCSVTest {
 
     }
 
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
-
-    @Test
-    public void shouldThrowInvalidMerchantNameException() throws ParseException {
-
-        expectedEx.expect(IllegalArgumentException.class);
-        expectedEx.expectMessage(MERCHANT_NAME_IS_NOT_VALID);
-        TransactionsService service = new TransactionsServiceImpl();
-        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
-                formatter.parse("20/08/2018 12:00:00"),
-                formatter.parse("20/08/2018 13:00:00"),
-                "INVALID");
-
-    }
-
 }
