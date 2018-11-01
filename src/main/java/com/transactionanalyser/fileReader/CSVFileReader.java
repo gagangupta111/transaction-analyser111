@@ -1,6 +1,12 @@
 package com.transactionanalyser.fileReader;
 
 import com.opencsv.CSVReader;
+import static com.transactionanalyser.constants.Formats.formatter;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.CSV_DATE_IS_INVALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.AMOUNT_IS_INVALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.FILE_IS_INVALID;
+import static com.transactionanalyser.constants.ValidatorErrorCodes.TYPE_IS_INVALID;
+
 import com.transactionanalyser.model.TransactionRecord;
 import com.transactionanalyser.model.Type;
 import sun.misc.ClassLoaderUtil;
@@ -16,11 +22,6 @@ import java.util.List;
 public class CSVFileReader implements FileReaderUtil {
 
     private String csvFilePath;
-    public static final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY hh:mm:ss");
-    public static final String CSV_DATE_IS_INVALID = " The value of Date is not as per accepted format ";
-    public static final String AMOUNT_IS_INVALID = "The value of Amount is not valid ";
-    public static final String TYPE_IS_INVALID = "The value of Type is not valid ";
-    public static final String FILE_IS_INVALID = "The file path or name is invalid ";
 
     public CSVFileReader(String csvFilePath) {
         this.csvFilePath = csvFilePath;

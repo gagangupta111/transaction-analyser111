@@ -5,10 +5,9 @@ import com.transactionanalyser.model.TransactionRecord;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Validation {
+import static com.transactionanalyser.constants.ValidatorErrorCodes.MERCHANT_NAME_IS_NOT_VALID;
 
-    public static final String MERCHANT_NAME_IS_NOT_VALID =
-            "Merchant name is either empty or not found in records.";
+public class Validator {
 
     public static void validateMerchantName(String merchant, List<TransactionRecord> list){
 

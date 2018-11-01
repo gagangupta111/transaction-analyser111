@@ -4,7 +4,7 @@ import com.transactionanalyser.cache.TransactionRecordCacheService;
 import com.transactionanalyser.fileReader.CSVFileReader;
 import com.transactionanalyser.fileReader.FileReaderUtil;
 import com.transactionanalyser.model.TransactionRecord;
-import com.transactionanalyser.validation.Validation;
+import com.transactionanalyser.validation.Validator;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +23,7 @@ public class TransactionsServiceImpl implements TransactionsService{
         service.initialize();
         List<TransactionRecord> list = service.getTRANSACTION_RECORDS();
 
-        Validation.validateMerchantName(merchant, list);
+        Validator.validateMerchantName(merchant, list);
 
         List<String> listOfReversalIds = new ArrayList<>();
         list = list.stream()
