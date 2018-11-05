@@ -40,9 +40,8 @@ public class TransactionsServiceImpl implements TransactionsService{
                 .collect(Collectors.toList());
 
         Validator.validateReversalIds(listOfReversalIds, paymentIds);
-        return list.stream()
-                .filter(record -> !listOfReversalIds.contains(record.getId())).collect(Collectors.toList());
-
+        list.removeIf(record -> listOfReversalIds.contains(record.getId()));
+        return list;
     }
 
 }
