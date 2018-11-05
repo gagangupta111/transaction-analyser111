@@ -2,6 +2,8 @@ package com.transactionanalyser.service;
 
 import com.transactionanalyser.exception.BadCsvException;
 import com.transactionanalyser.exception.BadInputException;
+import com.transactionanalyser.fileReader.CSVFileReader;
+import com.transactionanalyser.fileReader.FileReaderUtil;
 import com.transactionanalyser.model.TransactionRecord;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -37,7 +39,9 @@ public class TransactionsServiceInvalidCSVTests {
 
         expectedEx.expect(BadInputException.class);
         expectedEx.expectMessage(MERCHANT_NAME_INVALID);
-        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("valid_csv_1.csv",
+
+        FileReaderUtil fileReaderUtil = new CSVFileReader("valid_csv_1.csv");
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters(fileReaderUtil,
                 validateDate("20/08/2018 12:00:00"),
                 validateDate("20/08/2018 13:00:00"),
                 "INVALID");
@@ -49,7 +53,9 @@ public class TransactionsServiceInvalidCSVTests {
 
         expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(DATE_IS_INVALID + formatter.toPattern());
-        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_date_csv_1.csv",
+
+        FileReaderUtil fileReaderUtil = new CSVFileReader("invalid_date_csv_1.csv");
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters(fileReaderUtil,
                 validateDate("20/08/2018 12:00:00"),
                 validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
@@ -60,7 +66,9 @@ public class TransactionsServiceInvalidCSVTests {
 
         expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(AMOUNT_IS_INVALID);
-        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_amount_csv_2.csv",
+
+        FileReaderUtil fileReaderUtil = new CSVFileReader("invalid_amount_csv_2.csv");
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters(fileReaderUtil,
                 validateDate("20/08/2018 12:00:00"),
                 validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
@@ -71,7 +79,9 @@ public class TransactionsServiceInvalidCSVTests {
 
         expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(TYPE_IS_INVALID);
-        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_type_csv_3.csv",
+
+        FileReaderUtil fileReaderUtil = new CSVFileReader("invalid_type_csv_3.csv");
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters(fileReaderUtil,
                 validateDate("20/08/2018 12:00:00"),
                 validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
@@ -82,7 +92,9 @@ public class TransactionsServiceInvalidCSVTests {
 
         expectedEx.expect(BadInputException.class);
         expectedEx.expectMessage(FILE_IS_INVALID);
-        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("xxx.csv",
+
+        FileReaderUtil fileReaderUtil = new CSVFileReader("xxx.csv");
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters(fileReaderUtil,
                 validateDate("20/08/2018 12:00:00"),
                 validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");
@@ -93,7 +105,9 @@ public class TransactionsServiceInvalidCSVTests {
 
         expectedEx.expect(BadCsvException.class);
         expectedEx.expectMessage(REVERSAL_ID_INVALID);
-        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters("invalid_reversal_ids_4.csv",
+
+        FileReaderUtil fileReaderUtil = new CSVFileReader("invalid_reversal_ids_4.csv");
+        List<TransactionRecord> actualList = service.getTransactionsBaseOnParameters(fileReaderUtil,
                 validateDate("20/08/2018 12:00:00"),
                 validateDate("20/08/2018 13:00:00"),
                 "Kwik-E-Mart");

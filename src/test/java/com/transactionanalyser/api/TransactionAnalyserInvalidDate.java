@@ -2,6 +2,8 @@ package com.transactionanalyser.api;
 
 import com.transactionanalyser.exception.BadCsvException;
 import com.transactionanalyser.exception.BadInputException;
+import com.transactionanalyser.fileReader.CSVFileReader;
+import com.transactionanalyser.fileReader.FileReaderUtil;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +17,8 @@ public class TransactionAnalyserInvalidDate {
 
     @BeforeClass
     public static void init(){
-        transactionAnalyser = new TransactionAnalyser();
+        FileReaderUtil fileReaderUtil = new CSVFileReader("valid_csv_1.csv");
+        transactionAnalyser = new TransactionAnalyser(fileReaderUtil);
     }
 
     @Rule
@@ -27,8 +30,7 @@ public class TransactionAnalyserInvalidDate {
         expectedEx.expect(BadInputException.class);
         expectedEx.expectMessage(DATE_IS_INVALID);
 
-       transactionAnalyser.analyseTransaction("valid_csv_1.csv",
-               "20/08/2018 12:00",
+        transactionAnalyser.analyseTransaction("20/08/2018 12:00",
                "20/08/2018 13:00:00",
                "Kwik-E-Mart");
 
@@ -40,8 +42,7 @@ public class TransactionAnalyserInvalidDate {
         expectedEx.expect(BadInputException.class);
         expectedEx.expectMessage(DATE_IS_INVALID);
 
-        transactionAnalyser.analyseTransaction("valid_csv_1.csv",
-                "20/08/2018 12:00:00",
+        transactionAnalyser.analyseTransaction("20/08/2018 12:00:00",
                 "20/08/2018 13:00",
                 "Kwik-E-Mart");
 
